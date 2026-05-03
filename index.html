@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRYPTX— Escape</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ===== BACKGROUND ORBS ===== -->
+    <div class="orb-container">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+    </div>
+
+    <!-- ===== SPLASH / START SCREEN ===== -->
+    <div id="screen-start" class="screen active">
+      <div class="splash-inner">
+        <div class="splash-glyph">⬡</div>
+        <h1 class="splash-title">CIPHER<span>ROOM</span></h1>
+        <p class="splash-sub">
+          You've been locked inside. Find the clues. Crack the code. Escape.
+        </p>
+        <div class="difficulty-grid">
+          <button class="diff-btn" data-diff="easy">
+            <span class="diff-icon">◈</span>
+            <span class="diff-name">EASY</span>
+            <span class="diff-desc">120s · Clear hints</span>
+          </button>
+          <button class="diff-btn" data-diff="medium">
+            <span class="diff-icon">◉</span>
+            <span class="diff-name">MEDIUM</span>
+            <span class="diff-desc">90s · Hidden hints</span>
+          </button>
+          <button class="diff-btn" data-diff="hard">
+            <span class="diff-icon">◎</span>
+            <span class="diff-name">HARD</span>
+            <span class="diff-desc">60s · Tricky logic</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MAIN GAME SCREEN ===== -->
+    <div id="screen-game" class="screen">
+      <!-- HUD -->
+      <div id="hud">
+        <div class="hud-left">
+          <span class="hud-label">CLUES</span>
+          <span id="clue-counter">0/6</span>
+        </div>
+        <div class="hud-center">
+          <span id="hud-diff-badge">EASY</span>
+        </div>
+        <div class="hud-right">
+          <span class="hud-label">TIME</span>
+          <span id="timer">2:00</span>
+        </div>
+      </div>
+
+      <!-- ROOM -->
+      <div id="room">
+        <!-- Back wall -->
+        <div class="wall wall-back"></div>
+
+        <!-- Objects will be injected by JS -->
+        <div id="objects-layer"></div>
+
+        <!-- Door -->
+        <div id="door" class="room-object door-obj">
+          <div class="door-frame">
+            <div class="door-panel">
+              <div class="door-knob"></div>
+              <div class="door-label">EXIT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM CONSOLE -->
+      <div id="console-bar">
+        <div id="clue-log">
+          <span class="log-placeholder"
+            >● Explore the room. Click objects to investigate.</span
+          >
+        </div>
+        <button id="open-door-btn">🔓 TRY DOOR</button>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: OBJECT INSPECT ===== -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div id="modal-box" class="modal-box">
+        <button id="modal-close" class="modal-close">✕</button>
+        <div id="modal-icon" class="modal-icon">🕰</div>
+        <h2 id="modal-title">Object Name</h2>
+        <p id="modal-body" class="modal-body"></p>
+        <div id="modal-clue-reveal" class="modal-clue-reveal hidden">
+          <div class="clue-tag">🔍 CLUE FOUND</div>
+          <p id="modal-clue-text"></p>
+        </div>
+        <button id="modal-examine" class="btn-neon">EXAMINE CLOSELY</button>
+      </div>
+    </div>
+
+    <!-- ===== MODAL: DOOR / PASSWORD ===== -->
+    <div id="modal-door-overlay" class="modal-overlay hidden">
+      <div id="modal-door-box" class="modal-box door-modal">
+        <button id="door-modal-close" class="modal-close">✕</button>
+        <div class="modal-icon">🚪</div>
+        <h2>ESCAPE DOOR</h2>
+        <p id="door-hint-text" class="modal-body"></p>
+        <div class="password-input-wrap">
+          <input
+            id="password-input"
+            type="text"
+            maxlength="6"
+            placeholder="ENTER CODE"
+            autocomplete="off"
+          />
+        </div>
+        <p id="door-error" class="door-error hidden"></p>
+        <button id="submit-password" class="btn-neon">UNLOCK</button>
+      </div>
+    </div>
+
+    <!-- ===== WIN SCREEN ===== -->
+    <div id="screen-win" class="screen">
+      <div class="win-inner">
+        <div class="win-glyph">✦</div>
+        <h1 class="win-title">YOU ESCAPED</h1>
+        <p id="win-time-msg" class="win-sub"></p>
+        <div id="confetti-container"></div>
+        <button id="win-restart" class="btn-neon">PLAY AGAIN</button>
+      </div>
+    </div>
+
+    <!-- ===== LOSE SCREEN ===== -->
+    <div id="screen-lose" class="screen">
+      <div class="lose-inner">
+        <div class="lose-glyph">☠</div>
+        <h1 id="lose-title" class="lose-title">TIME'S UP</h1>
+        <p id="lose-sub" class="lose-sub">The room claimed another soul.</p>
+        <button id="lose-restart" class="btn-neon">TRY AGAIN</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
